@@ -2,6 +2,8 @@
 Created by Mazharul Islam Leon
 Created on Wed Dec 15 2021
 
+This is main config file of the image classifier
+
 """
 
 import os
@@ -43,7 +45,7 @@ MOMENTUM = 0.9
 LR = 0.001
 
 # By default the model name is set to "ResNet50"
-MODEL_NAME = "ResNet50"
+MODEL_NAME = "resnet50"
 
 # Creating a dictonary to store the model_name and corresponding to their actual name   
 MODEL_NAMES = {
