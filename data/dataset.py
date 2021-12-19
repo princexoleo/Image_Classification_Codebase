@@ -16,7 +16,7 @@ import sys
 sys.path.append("..") 
 import cfg
 
-from data import get_random_eraser
+# from data import get_random_eraser
 
 
 input_size = cfg.INPUT_SIZE
@@ -64,6 +64,7 @@ class  SelfCustomDataset(Dataset):
 
 
 train_label_dir = cfg.TRAIN_LABEL_DIR
+print(train_label_dir)
 train_datasets = SelfCustomDataset(train_label_dir, imageset='train')
 train_dataloader = torch.utils.data.DataLoader(train_datasets, batch_size=batch_size, shuffle=True, num_workers=2)
 

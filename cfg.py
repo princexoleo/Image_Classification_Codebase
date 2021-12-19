@@ -8,8 +8,11 @@ This is main config file of the image classifier
 
 import os
 
+
 # Home directory of the projects
-HOME_DIR = os.path.expanduser("~")
+HOME = os.path.expanduser("~")
+#HOME = os.path.expanduser("C:\Users\iceba\workspace\ML\wbc\codebase\Image_Classification_Codebase")
+
 
 # Number of Class in the dataset
 NUM_CLASSES = 10
@@ -27,7 +30,7 @@ EPOCHS = 10
 MAX_EPOCH = 100
 
 # By default the number of GPU is set to 1
-NUM_GPU = 1
+GPUS = 0
 
 # By default the Resume Epoch is set to 0
 RESUME_EPOCH = 0
@@ -45,7 +48,12 @@ MOMENTUM = 0.9
 LR = 0.001
 
 # By default the model name is set to "ResNet50"
-MODEL_NAME = "resnet50"
+# MODEL_NAME = "resnet50"
+model_name = 'resnet50'
+
+# 
+from models import Resnet50, Resnet101, Resnext101_32x8d,Resnext101_32x16d, Densenet121, Densenet169, Mobilenetv2, Efficientnet, Resnext101_32x32d, Resnext101_32x48d
+
 
 # Creating a dictonary to store the model_name and corresponding to their actual name   
 MODEL_NAMES = {
@@ -63,18 +71,18 @@ MODEL_NAMES = {
     }
 
 # By default the base_dir is set to "./data"
-BASE_DIR = "./data"
+BASE = os.path.join(HOME, "workspace\ML\wbc\codebase\Image_Classification_Codebase\data")
 
 # By default the model weight saving path is set to BASE + "weights"
-MODEL_SAVE_PATH = BASE_DIR + "weights/"
+# MODEL_SAVE_PATH = BASE + "weights/"
+SAVE_FOLDER = BASE + 'weights\\'
 
 # Training label path
-TRAIN_LABEL_PATH = BASE_DIR + "train_labels.txt"
-# Validation label path
-VAL_LABEL_PATH = BASE_DIR + "val_labels.txt"
-# Testing label path
-TEST_LABEL_PATH = BASE_DIR + "test_labels.txt"
-
+TRAIN_LABEL_DIR =BASE + '\\train.txt'     
+VAL_LABEL_DIR = BASE + '\\val.txt'
+TEST_LABEL_DIR = BASE + '\\test.txt'
 
 # By default the trained model file name is set to "model.pth"
-TRAINED_MODEL = BASE_DIR + "weights/resnext101_32x32d/epoch_40.pth"
+TRAINED_MODEL = BASE + "weights/resnext101_32x32d/epoch_40.pth"
+# by default train dir is set to "./data/train"
+# TRAIN_LABEL_DIR =  BASE + "\\train.txt"

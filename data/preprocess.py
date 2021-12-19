@@ -1,24 +1,31 @@
 import os
 import glob
 
-
-
 import sys 
-sys.path.append("..") 
+sys.path.append("..")  # add the path of the parent directory") 
+#sys.path.append(os.path.abspath(".."))
 import cfg
 import random
 
 
 
 if __name__ == '__main__':
-    traindata_path = cfg.BASE + 'train'
+    
+    traindata_path = os.path.join(cfg.BASE, "train\\")
+    #print(traindata_path)
+    # Join BASE and train path
+    #valdata_path = os.path.join(cfg.BASE, 'val')
     labels = os.listdir(traindata_path)
-    valdata_path = cfg.BASE + 'test'
+    print(labels)
+    valdata_path = os.path.join(cfg.BASE, 'test')
     ##写train.txt文件
-    txtpath = cfg.BASE
+    txtpath = cfg.BASE + "/"
     # print(labels)
     for index, label in enumerate(labels):
-        imglist = glob.glob(os.path.join(traindata_path,label, '*.png'))
+        label = label+"\\"
+        #print(os.path.join(traindata_path,label))
+        
+        imglist = glob.glob(os.path.join(traindata_path,label, '*.jpg'))
         # print(imglist)
         random.shuffle(imglist)
         print(len(imglist))
@@ -26,7 +33,7 @@ if __name__ == '__main__':
         vallist = imglist[(int(0.8*len(imglist))+1):]
         with open(txtpath + 'train.txt', 'a')as f:
             for img in trainlist:
-                # print(img + ' ' + str(index))
+                #print(img + ' ' + str(index))
                 f.write(img + ' ' + str(index))
                 f.write('\n')
 
