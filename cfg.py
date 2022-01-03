@@ -7,10 +7,11 @@ This is main config file of the image classifier
 """
 
 import os
+from pathlib import Path
 
 
 # Home directory of the projects
-HOME = os.path.expanduser("~")
+HOME = Path.home()
 #HOME = os.path.expanduser("C:\Users\iceba\workspace\ML\wbc\codebase\Image_Classification_Codebase")
 
 
@@ -71,18 +72,26 @@ MODEL_NAMES = {
     }
 
 # By default the base_dir is set to "./data"
-BASE = os.path.join(HOME, "workspace\ML\wbc\codebase\Image_Classification_Codebase\data")
+#BASE = os.path.join(HOME, "workspace\ML\wbc\codebase\Image_Classification_Codebase\data")
+BASE =  Path(".")
 
 # By default the model weight saving path is set to BASE + "weights"
 # MODEL_SAVE_PATH = BASE + "weights/"
-SAVE_FOLDER = BASE + 'weights\\'
+# SAVE_FOLDER = BASE + 'weights\\'
+SAVE_FOLDER = BASE / "weights"
 
 # Training label path
-TRAIN_LABEL_DIR =BASE + '\\train.txt'     
-VAL_LABEL_DIR = BASE + '\\val.txt'
-TEST_LABEL_DIR = BASE + '\\test.txt'
+# TRAIN_LABEL_DIR =BASE + '\\train.txt'     
+# VAL_LABEL_DIR = BASE + '\\val.txt'
+# TEST_LABEL_DIR = BASE + '\\test.txt'
+
+TRAIN_LABEL_DIR = BASE / "data" / "train.txt"   
+VAL_LABEL_DIR = BASE / "data" / "val.txt"      
+TEST_LABEL_DIR = BASE / "data" / "test.txt"   
+
 
 # By default the trained model file name is set to "model.pth"
-TRAINED_MODEL = BASE + "weights/resnext101_32x32d/epoch_40.pth"
+# TRAINED_MODEL = BASE + "weights/resnext101_32x32d/epoch_40.pth"
+TRAINED_MODEL = BASE / "weights" / "resnet50" / "epoch_40.pth"
 # by default train dir is set to "./data/train"
 # TRAIN_LABEL_DIR =  BASE + "\\train.txt"
