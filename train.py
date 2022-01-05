@@ -18,7 +18,7 @@ from utils import adjust_learning_rate_cosine, adjust_learning_rate_step
 
 
 ## stored the model with weights and biases
-save_folder = cfg.SAVE_FOLDER + cfg.model_name
+save_folder = cfg.SAVE_FOLDER / cfg.model_name
 os.makedirs(save_folder, exist_ok=True)
 
 

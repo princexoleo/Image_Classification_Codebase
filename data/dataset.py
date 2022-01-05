@@ -10,6 +10,7 @@ from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import os
 from PIL import Image
+from pathlib import Path
 from data import get_train_transform, get_test_transform
 
 import sys 
@@ -44,8 +45,9 @@ class  SelfCustomDataset(Dataset):
 
     def __getitem__(self, index):
         img_path, label = self.imgs[index]
-        # print(img_path)
-        img = Image.open(img_path).convert('RGB')
+        # print(img_path, label)
+        img_path = cfg.BASE / "data" /img_path
+        img = Image.open(img_path).convert('RGB') # Error 2: No file or directory at 'img_path'
         if self.img_aug:
             img =self.transform(img)
 

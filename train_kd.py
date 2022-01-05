@@ -13,15 +13,16 @@ import cfg
 from utils import adjust_learning_rate_cosine, adjust_learning_rate_step, loss_fn_kd
 
 
-##创建训练模型参数保存的文件夹
+## model saved with model name
 save_folder = cfg.SAVE_FOLDER + cfg.model_name
 os.makedirs(save_folder, exist_ok=True)
 
 
+# This function load the model from the existing checkpoint and return it.
 def load_checkpoint(filepath):
     checkpoint = torch.load(filepath)
-    model = checkpoint['model']  # 提取网络结构
-    model.load_state_dict(checkpoint['model_state_dict'])  # 加载网络权重参数
+    model = checkpoint['model']  # check existing model checkpoint
+    model.load_state_dict(checkpoint['model_state_dict'])  # Load from existing model checkpoint
     return model
 
 
@@ -34,7 +35,7 @@ def train_kd(model, teacher_model, optimizer, loss_fn_kd, T, alpah):
     lr = cfg.LR
 
     batch_size = cfg.BATCH_SIZE
-    #每一个epoch含有多少个batch
+    # epoch and batch size
     max_batch = len(train_datasets)//batch_size
     epoch_size = len(train_datasets) // batch_size
     ## 训练max_epoch个epoch
@@ -44,12 +45,12 @@ def train_kd(model, teacher_model, optimizer, loss_fn_kd, T, alpah):
 
     epoch = cfg.RESUME_EPOCH
 
-    # cosine学习率调整
+    # cosine
     warmup_epoch=5
     warmup_steps = warmup_epoch * epoch_size
     global_step = 0
 
-    # step 学习率调整参数
+    # step values
     stepvalues = (10 * epoch_size, 20 * epoch_size, 30 * epoch_size)
     step_index = 0
 
@@ -62,7 +63,7 @@ def train_kd(model, teacher_model, optimizer, loss_fn_kd, T, alpah):
             batch_iterator = iter(train_dataloader)
             loss = 0
             epoch += 1
-            ###保存模型
+            ###check epoch
             if epoch % 5 == 0 and epoch > 0:
                 if cfg.GPUS > 1:
                     checkpoint = {'model': model.module,
